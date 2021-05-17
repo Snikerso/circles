@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { CircleProvider } from './state/useCircle';
 
 ReactDOM.render(
   <React.StrictMode>
+    <CircleProvider>
     <App />
+    </CircleProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

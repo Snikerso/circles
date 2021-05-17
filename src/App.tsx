@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import Circle from './Circle';
+import Button from './components/Button';
+import { useCircle } from './state/useCircle';
+
+const StyledWrapper= styled.div`
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+    
+`
+const StyledWrapperCircles= styled.div`
+  display:flex;
+  flex-wrap:wrap;
+  gap:30px;
+    
+`
+
 
 function App() {
+  const {circleState, circleDispatch} = useCircle()
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledWrapper>
+      <StyledWrapperCircles>
+       {circleState.map((item:string,index:number) =>  {
+         return <Circle key={item + index} text={item}/>
+        })}
+      </StyledWrapperCircles>
+      <Button onClick={()=>circleDispatch({type:"ADD", payload:{circle:"Lorem ipsum"}})} text={"Dodaj"} />
+      <Button onClick={()=>circleDispatch({type:"DELETE"})} text={"Usuń"} />
+    </StyledWrapper>
   );
 }
 
